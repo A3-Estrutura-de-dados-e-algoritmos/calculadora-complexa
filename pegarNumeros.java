@@ -54,16 +54,16 @@ public class pegarNumeros {
     public void loopNumeros() {
         int cont = 0;
         double valor;
-        do {
-            System.out.printf("Digite o número real do %dº complexo: ", cont + 1);
+        for (int i = 0; i < quantidadeNumerosComplexos; i++) {
+            System.out.printf("Digite o número real do %dº complexo: ", i + 1);
             valor = sc.nextDouble();
             numerosComplexos[cont] = valor;
             cont ++;
-            System.out.printf("Digite o número imaginário %dº número complexo: ", cont);
+            System.out.printf("Digite o número imaginário %dº número complexo: ", i + 1);
             valor = sc.nextDouble();
             numerosComplexos[cont] = valor;
             cont++;
-        } while (cont != quantidadeNumerosComplexos * 2);
+        }
     }
 
     public void imprimir() {
