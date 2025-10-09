@@ -27,7 +27,7 @@ public class operacoesCalculadora{
         String[] retornoImaginarios = operacoesPrimarias.somar(coeficientesImaginarios);
 
         double[] novoNumero = new double[2];
-        String arvore = " ";
+        String arvore = "";
         novoNumero[0] = Double.parseDouble(retornoReais[0]);
         arvore += retornoReais[1];          
         novoNumero[1] = Double.parseDouble(retornoImaginarios[0]);
