@@ -7,25 +7,33 @@ public class operacoesCalculadora{
 
         prompt.imprimir();
 
+        //quantidade de numeros complexos que irá somar
         int quantidadeComplexosSoma, index;
 
+        //pergunta de quantos Zs serão somados
         System.out.println("Quantos Zs você quer somar? ");
         quantidadeComplexosSoma = sc.nextInt();
 
+        //pega a quantidade de index que irão ser somados
         int[] indexSoma = new int[quantidadeComplexosSoma];
 
+        //pega os index dos numeros que serão somados
         System.out.println("Quais Zs você quer somar? ");
         for (int i = 0; i < quantidadeComplexosSoma; i++) {
             index = sc.nextInt();
             indexSoma[i] = index - 1;
         }
 
+        //pega os coeficientes reais dos numeros selecionados
         double[] coeficientesReais = prompt.GetCoeficientesReais(indexSoma);
+        //pega os coeficientes imaginários dos coeficientes a serem somados
         double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexSoma);
 
-        String[] retornoReais = operacoesPrimarias.somar(coeficientesReais);
-        String[] retornoImaginarios = operacoesPrimarias.somar(coeficientesImaginarios);
+        //pega o retorno das operações com soma
+        String[] retornoReais = operacoesPrimarias.multiplicar(coeficientesReais);
+        String[] retornoImaginarios = operacoesPrimarias.multiplicar(coeficientesImaginarios);
 
+        //atribui o novo número e retorna a nova árvore
         double[] novoNumero = new double[2];
         String arvore = "";
         novoNumero[0] = Double.parseDouble(retornoReais[0]);

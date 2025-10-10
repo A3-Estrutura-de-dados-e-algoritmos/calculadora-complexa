@@ -70,6 +70,7 @@ public class pegarNumeros {
         }
     }
 
+    //função que adiciona um novo número a lista
     public void adicionarNovoNumero(double[] novoNumeroComplexo) {
         for (int i = 0; i < novoNumeroComplexo.length; i++) {
             System.out.println(novoNumeroComplexo[i]);
