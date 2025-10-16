@@ -13,11 +13,9 @@ public class main{
 
             prompt.loopNumeros();
 
-            double[] valores = prompt.getTodosCoeficientesReais();
+            operacoesCalculadora.adicaoComplexa(prompt);
 
-            for (int i = 0; i < valores.length; i++) {
-                System.out.println(valores[i]);
-            }
+            prompt.imprimir();
 
             //Adição dos reais e imaginários separado para que o resultado possa ser formatado bem quando for printado, já que é a + bi
             //System.out.println(operacoesCalculadora.subtracaoComplexa(vR1, vI1, vR2, vI2));
