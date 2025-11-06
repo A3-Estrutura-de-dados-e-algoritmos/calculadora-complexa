@@ -1,25 +1,175 @@
+import java.util.Scanner;
+
 public class operacoesCalculadora{
 
-    public static String adicaoComplexa(double vR1, double vI1, double vR2, double vI2) {
-            double addReal = (vR1 + vR2);
-            double addImagi = (vI1 + vI2);
-            String resultAdd = addReal + " + " + addImagi + "i";
-            System.out.println("A soma de " + vR1 + " + " + vI1 + "i " + "com " + vR2 + " + " + vI2 + "i " + "é igual a " + resultAdd);
-            return resultAdd;
+    public static void adicaoComplexa(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+
+        prompt.imprimir();
+
+        //quantidade de numeros complexos que irá somar
+        int quantidadeComplexosSoma, index;
+
+        //pergunta de quantos Zs serão somados
+        System.out.println("Quantos Zs você quer somar? ");
+        quantidadeComplexosSoma = sc.nextInt();
+
+        //pega a quantidade de index que irão ser somados
+        int[] indexSoma = new int[quantidadeComplexosSoma];
+
+        //pega os index dos numeros que serão somados
+        System.out.println("Quais Zs você quer somar? ");
+        for (int i = 0; i < quantidadeComplexosSoma; i++) {
+            index = sc.nextInt();
+            indexSoma[i] = index - 1;
+        }
+
+        //pega os coeficientes reais dos numeros selecionados
+        double[] coeficientesReais = prompt.GetCoeficientesReais(indexSoma);
+        //pega os coeficientes imaginários dos coeficientes a serem somados
+        double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexSoma);
+
+        //pega o retorno das operações com soma
+        String[] retornoReais = operacoesPrimarias.multiplicar(coeficientesReais);
+        String[] retornoImaginarios = operacoesPrimarias.multiplicar(coeficientesImaginarios);
+
+        //atribui o novo número e retorna a nova árvore
+        double[] novoNumero = new double[2];
+        String arvore = "";
+        novoNumero[0] = Double.parseDouble(retornoReais[0]);
+        arvore += retornoReais[1];          
+        novoNumero[1] = Double.parseDouble(retornoImaginarios[0]);
+        arvore += retornoImaginarios[1];
+
+        prompt.adicionarNovoNumero(novoNumero);
+        System.out.println(arvore);
+        
+        
+        sc.close();
     }
 
-    public static String subtracaoComplexa(double vR1, double vI1, double vR2, double vI2) {
-        double subReal = (vR1 - vR2);
-        double subImagi = (vI1 - vI2);
-        String resultSub = subReal + " + " + subImagi + "i";
-        System.out.println("A soma de " + vR1 + " + " + vI1 + "i " + "com " + vR2 + " + " + vI2 + "i " + "é igual a " + resultSub);
-        return resultSub;
+    public static void subtracaoComplexa(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+
+        prompt.imprimir();
+
+        //quantidade de numeros complexos que irá subtrair
+        int quantidadeComplexosSub, index;
+
+        //pergunta de quantos Zs serão subtraídos
+        System.out.println("Quantos Zs você quer subtrair? ");
+        quantidadeComplexosSub = sc.nextInt();
+
+        //pega a quantidade de index que irão ser subtraídos
+        int[] indexSub = new int[quantidadeComplexosSub];
+
+        //pega os index dos numeros que serão subtraídos
+        System.out.println("Quais Zs você quer subtrair? ");
+        for (int i = 0; i < quantidadeComplexosSub; i++) {
+            index = sc.nextInt();
+            indexSub[i] = index - 1;
+        }
+
+        //pega os coeficientes reais dos numeros selecionados
+        double[] coeficientesReais = prompt.GetCoeficientesReais(indexSub);
+        //pega os coeficientes imaginários dos coeficientes a serem somados
+        double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexSub);
+
+        //pega o retorno das operações subtraidas
+        String[] retornoReais = operacoesPrimarias.subtrair(coeficientesReais);
+        String[] retornoImaginarios = operacoesPrimarias.subtrair(coeficientesImaginarios);
+
+        //atribui o novo número e retorna a nova árvore
+        double[] novoNumero = new double[2];
+        String arvore = "";
+        novoNumero[0] = Double.parseDouble(retornoReais[0]);
+        arvore += retornoReais[1];          
+        novoNumero[1] = Double.parseDouble(retornoImaginarios[0]);
+        arvore += retornoImaginarios[1];
+
+        prompt.adicionarNovoNumero(novoNumero);
+        System.out.println(arvore);
+        
+        sc.close();
     }
 
-    /* public static String multiComplexa(double vR1, double vI1, double vR2, double vI2) {
-        double multiReal = (vR1 * vR2) + (vR1 * vI2) + (vI1 * vR2) + (vI1 * vI2);
-        double multiImagi = 
 
-        return resultMulti;
-    } */
-}
+    public static void multiplicacaoComplexa(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+
+        prompt.imprimir();
+
+        final int quantidadeComplexosMulti = 2; 
+        int index;
+
+        System.out.println("A multiplicação é binária (Z1 * Z2).");
+        System.out.println("Quais Zs (Z1 e Z2) você quer multiplicar? ");
+
+        int[] indexMulti = new int[quantidadeComplexosMulti];
+        for (int i = 0; i < quantidadeComplexosMulti; i++) {
+        index = sc.nextInt();
+        indexMulti[i] = index - 1;
+        }
+
+        double[] coeficientesReais = prompt.GetCoeficientesReais(indexMulti);
+        double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexMulti);
+
+        double[] numerosParaMultiplicar = {
+        coeficientesReais[0], coeficientesReais[1],
+        coeficientesImaginarios[0], coeficientesImaginarios[1]
+        };
+
+        String[] resultadoMultiplicacao = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
+
+        double[] novoNumero = new double[2];
+        novoNumero[0] = Double.parseDouble(resultadoMultiplicacao[0]); 
+        novoNumero[1] = Double.parseDouble(resultadoMultiplicacao[1]);
+        String arvore = resultadoMultiplicacao[2]; 
+
+        prompt.adicionarNovoNumero(novoNumero);
+        System.out.println("Árvore: " + arvore);
+    }
+
+
+    public static void divisaoComplexa(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+        prompt.imprimir();
+
+        final int quantidadeComplexosDiv = 2; 
+        int index;
+
+        System.out.println("A divisão é binária (Z1 / Z2).");
+        System.out.println("Quais Zs (Z1 e Z2) você quer dividir? ");
+
+        int[] indexDiv = new int[quantidadeComplexosDiv];
+        for (int i = 0; i < quantidadeComplexosDiv; i++) {
+            index = sc.nextInt();
+            indexDiv[i] = index - 1;
+        }
+
+        double[] coeficientesReais = prompt.GetCoeficientesReais(indexDiv);
+        double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexDiv);
+
+
+        double[] numerosParaDividir = {
+            coeficientesReais[0], coeficientesReais[1],
+            coeficientesImaginarios[0], coeficientesImaginarios[1]
+        };
+
+        String [] resultadoDivisao = operacoesPrimarias.dividir(numerosParaDividir);
+
+        if (resultadoDivisao == null) {
+            System.out.println("Erro: divisão por zero!");
+            return;
+        }
+
+        double[] novoNumero = new double[2];
+        novoNumero[0] = Double.parseDouble(resultadoDivisao[0]); 
+        novoNumero[1] = Double.parseDouble(resultadoDivisao[1]); 
+        String arvore = resultadoDivisao[2]; 
+
+        prompt.adicionarNovoNumero(novoNumero);
+        System.out.println("Árvore: " + arvore); 
+
+    }    
+} 
