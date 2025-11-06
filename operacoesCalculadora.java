@@ -21,7 +21,7 @@ public class operacoesCalculadora{
         System.out.println("Quais Zs você quer somar? ");
         for (int i = 0; i < quantidadeComplexosSoma; i++) {
             index = sc.nextInt();
-            indexSoma[i] = index - 1;
+            indexSoma[i] = index;
         }
 
         //pega os coeficientes reais dos numeros selecionados
@@ -30,8 +30,8 @@ public class operacoesCalculadora{
         double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexSoma);
 
         //pega o retorno das operações com soma
-        String[] retornoReais = operacoesPrimarias.multiplicar(coeficientesReais);
-        String[] retornoImaginarios = operacoesPrimarias.multiplicar(coeficientesImaginarios);
+        String[] retornoReais = operacoesPrimarias.somar(coeficientesReais);
+        String[] retornoImaginarios = operacoesPrimarias.somar(coeficientesImaginarios);
 
         //atribui o novo número e retorna a nova árvore
         double[] novoNumero = new double[2];
@@ -45,7 +45,6 @@ public class operacoesCalculadora{
         System.out.println(arvore);
         
         
-        sc.close();
     }
 
     public static void subtracaoComplexa(pegarNumeros prompt) {
@@ -90,7 +89,6 @@ public class operacoesCalculadora{
         prompt.adicionarNovoNumero(novoNumero);
         System.out.println(arvore);
         
-        sc.close();
     }
 
 
@@ -108,7 +106,7 @@ public class operacoesCalculadora{
         int[] indexMulti = new int[quantidadeComplexosMulti];
         for (int i = 0; i < quantidadeComplexosMulti; i++) {
         index = sc.nextInt();
-        indexMulti[i] = index - 1;
+        indexMulti[i] = index;
         }
 
         double[] coeficientesReais = prompt.GetCoeficientesReais(indexMulti);
@@ -127,7 +125,7 @@ public class operacoesCalculadora{
         String arvore = resultadoMultiplicacao[2]; 
 
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println("Árvore: " + arvore);
+        System.out.println("arvore: " + arvore);
     }
 
 
@@ -144,7 +142,7 @@ public class operacoesCalculadora{
         int[] indexDiv = new int[quantidadeComplexosDiv];
         for (int i = 0; i < quantidadeComplexosDiv; i++) {
             index = sc.nextInt();
-            indexDiv[i] = index - 1;
+            indexDiv[i] = index;
         }
 
         double[] coeficientesReais = prompt.GetCoeficientesReais(indexDiv);
@@ -169,7 +167,32 @@ public class operacoesCalculadora{
         String arvore = resultadoDivisao[2]; 
 
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println("Árvore: " + arvore); 
+        System.out.println("arvore: " + arvore); 
 
-    }    
+    }
+    
+    public static void conjulgar(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Qual Z você quer conjulgar?");
+        prompt.imprimir();
+
+        int escolha = sc.nextInt();
+
+        if (escolha > prompt.quantidadeNumerosComplexos) {
+            System.out.println("Valor inválido");
+        } else {
+            double coeficienteReal = prompt.getCoeficienteReal(escolha);
+            double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
+
+            double[] novoNumero = new double[2];
+            novoNumero[0] = coeficienteReal;
+            novoNumero[1] = coeficienteImaginario * -1;
+
+            prompt.adicionarNovoNumero(novoNumero);
+            System.out.println("Numero complexo conjugado adicionado!");
+        }
+
+
+    }
 } 

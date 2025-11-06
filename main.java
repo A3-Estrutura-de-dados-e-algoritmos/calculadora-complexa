@@ -13,6 +13,41 @@ public class main{
 
             prompt.loopNumeros();
 
+            int escolha = -1;
+            while (escolha != 0) {
+                prompt.imprimir();
+                System.out.println("Qual operação você quer fazer?");
+                System.out.println("[1] - Soma");
+                System.out.println("[2] - Subtração");
+                System.out.println("[3] - Multiplicação");
+                System.out.println("[4] - Divisão");
+                System.out.println("[5] - conjulgar");
+
+                escolha = lerNum.nextInt();
+
+                switch (escolha) {
+                    case 0:
+                        break;
+                    case 1:
+                        operacoesCalculadora.adicaoComplexa(prompt);
+                        break;
+                    case 2:
+                        operacoesCalculadora.subtracaoComplexa(prompt);
+                        break;
+                    case 3:
+                        operacoesCalculadora.multiplicacaoComplexa(prompt);
+                        break;
+                    case 4:
+                        operacoesCalculadora.divisaoComplexa(prompt);
+                        break;
+                    case 5:
+                        operacoesCalculadora.conjulgar(prompt);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             operacoesCalculadora.adicaoComplexa(prompt);
 
             prompt.imprimir();
