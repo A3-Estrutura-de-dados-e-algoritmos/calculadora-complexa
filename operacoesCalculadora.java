@@ -194,4 +194,54 @@ public class operacoesCalculadora{
             
         }
     }
+
+    public static void elevar(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+        prompt.imprimir();
+
+        System.out.println("Qual Z você quer elevar?");
+        int escolha = sc.nextInt();
+
+        double coeficienteReal = prompt.getCoeficienteReal(escolha);
+        double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
+
+        System.out.println("Você quer eleva ele a quanto?");
+        int eleva = sc.nextInt();
+        int numerador = 1;
+        int denominador = 1;
+        int kFatorado = 1;
+        int k = 0;
+
+        for (int i = 0; i <= eleva; i++) {
+            k = i;
+
+            for (int j = 1; j <= eleva; j++) {
+                numerador = numerador * j;
+
+                if (j <= k) {
+                    kFatorado = kFatorado * j;
+                }
+
+                if (eleva - k >= j) {
+                    denominador = denominador * j;
+                }
+            }
+
+            System.out.println("k fatorado: " + kFatorado);
+            System.out.println("denominador: " + denominador);
+            System.out.println("numerador: " + numerador);
+
+            int nEscolheK = numerador / (kFatorado * denominador);
+
+            numerador = 1;
+            denominador = 1;
+            kFatorado = 1;
+
+            
+
+            System.out.println(nEscolheK);
+
+        }
+
+    }
 } 

@@ -13,6 +13,8 @@ public class main{
 
             prompt.loopNumeros();
 
+            operacoesCalculadora.elevar(prompt);
+            
             int escolha = -1;
             while (escolha != 0) {
                 prompt.imprimir();
