@@ -191,8 +191,7 @@ public class operacoesCalculadora{
 
             prompt.adicionarNovoNumero(novoNumero);
             System.out.println("Numero complexo conjugado adicionado!");
+            
         }
-
-
     }
 } 
