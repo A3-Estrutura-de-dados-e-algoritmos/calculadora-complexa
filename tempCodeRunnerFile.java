@@ -1,1 +1,1 @@
-adicionarNovoNumero
+prompt

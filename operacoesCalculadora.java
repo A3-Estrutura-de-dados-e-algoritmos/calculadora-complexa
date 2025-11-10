@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class operacoesCalculadora{
@@ -191,8 +192,141 @@ public class operacoesCalculadora{
 
             prompt.adicionarNovoNumero(novoNumero);
             System.out.println("Numero complexo conjugado adicionado!");
+            
+        }
+    }
+
+    public static void elevar(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+        prompt.imprimir();
+
+        System.out.println("Qual Z você quer elevar?");
+        int escolha = sc.nextInt();
+
+        double coeficienteReal = prompt.getCoeficienteReal(escolha);
+        double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
+
+        System.out.println("Você quer eleva ele a quanto?");
+        int eleva = sc.nextInt();
+        int numerador = 1, denominador = 1, kFatorado = 1;
+        int k = 0, verificacao = 0, contagemVerdadeiros = 0, contagemFalsos = 0;
+
+        double[] numerosParaMultiplicar = new double[4];
+        boolean[] verificaNumeroImaginario = new boolean[eleva + 1];
+        double[] expressaoExtendida = new double[eleva + 1];
+
+        ArrayList<Integer> indexSomaImaginarios = new ArrayList<Integer>();
+        ArrayList<Integer> indexSomaReais = new ArrayList<Integer>();
+
+        for (int i = 0; i <= eleva; i++) {
+            k = i;
+
+            for (int j = 1; j <= eleva; j++) {
+                numerador = numerador * j;
+
+                if (j <= k) {
+                    kFatorado = kFatorado * j;
+                }
+
+                if (eleva - k >= j) {
+                    denominador = denominador * j;
+                }
+            }
+
+            double nEscolheK = numerador / (kFatorado * denominador);
+            numerosParaMultiplicar[0] = nEscolheK;
+
+            numerador = 1;
+            denominador = 1;
+            kFatorado = 1;
+
+            double a = Math.pow(coeficienteReal, eleva - k);
+            numerosParaMultiplicar[1] = a;
+
+
+            double b = Math.pow(coeficienteImaginario, k);
+            numerosParaMultiplicar[2] = b;
+
+            if (k == 0) {
+                numerosParaMultiplicar[3] = 1;
+            }else if (k == 1) {
+                verificacao = 1;
+            } else if (k == 2) {
+                numerosParaMultiplicar[3] = -1;
+            } else if (k == 3) {
+                verificacao = 1;
+                numerosParaMultiplicar[3] = -1;
+            }
+
+            if (k % 4 == 0) {
+                numerosParaMultiplicar[3] = 1;
+            } else if (k % 4 == 1) {
+                verificacao = 1;
+            } else if (k % 4 == 2) {
+                numerosParaMultiplicar[3] = -1;
+            } else if (k % 4 == 3) {
+                verificacao = 1;
+                numerosParaMultiplicar[3] = -1;
+            }
+
+            String[] resultado = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
+
+            if (verificacao == 1) {
+                verificaNumeroImaginario[i] = true;
+            } else {
+                verificaNumeroImaginario[i] = false;
+            }
+
+            verificacao = 0;
+
+            expressaoExtendida[i] = Double.parseDouble(resultado[0]);
+            
+            System.out.println(resultado[1]);
+
         }
 
+        for (int i = 0; i < expressaoExtendida.length; i++) {
+            if (verificaNumeroImaginario[i]) {
+                indexSomaImaginarios.add(i);
+                contagemVerdadeiros ++;
+            } else {
+                indexSomaReais.add(i);
+                contagemFalsos++;
+            }
+        }
+
+        double[] numerosParaSomarReais = new double[contagemFalsos];
+        double[] numerosParaSomarImaginarios = new double[contagemVerdadeiros];
+        double[] novoNumeroComplexo = new double[2];
+
+        if (contagemVerdadeiros >= 2) {
+            for (int i = 0; i < contagemVerdadeiros; i ++) {
+                numerosParaSomarImaginarios[i] = expressaoExtendida[indexSomaImaginarios.get(i)];
+            }
+
+            String[] resultado = operacoesPrimarias.somar(numerosParaSomarImaginarios);
+            System.out.println(resultado[1]);
+            novoNumeroComplexo[1] = Double.parseDouble(resultado[0]);
+        }
+
+        if (contagemFalsos >= 2) {
+            for (int i = 0; i < contagemFalsos; i++) {
+                numerosParaSomarReais[i] = expressaoExtendida[indexSomaReais.get(i)];
+            }
+
+            String[] resultado = operacoesPrimarias.somar(numerosParaSomarReais);
+            System.out.println(resultado[1]);
+            novoNumeroComplexo[0] = Double.parseDouble(resultado[0]);
+        }
+
+        if (contagemFalsos == 1) {
+            novoNumeroComplexo[0] = expressaoExtendida[indexSomaReais.get(0)];
+        }
+        if (contagemVerdadeiros == 1) {
+            novoNumeroComplexo[1] = expressaoExtendida[indexSomaImaginarios.get(0)];
+        }
+
+        prompt.adicionarNovoNumero(novoNumeroComplexo);
 
     }
 } 

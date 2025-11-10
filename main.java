@@ -12,7 +12,7 @@ public class main{
             pegarNumeros prompt = new pegarNumeros(quantidadeNumerosComplexos);
 
             prompt.loopNumeros();
-
+            
             int escolha = -1;
             while (escolha != 0) {
                 prompt.imprimir();
@@ -22,6 +22,7 @@ public class main{
                 System.out.println("[3] - Multiplicação");
                 System.out.println("[4] - Divisão");
                 System.out.println("[5] - conjulgar");
+                System.out.println("[6] - elevar");
 
                 escolha = lerNum.nextInt();
 
@@ -43,6 +44,8 @@ public class main{
                     case 5:
                         operacoesCalculadora.conjulgar(prompt);
                         break;
+                    case 6:
+                        operacoesCalculadora.elevar(prompt);
                     default:
                         break;
                 }
