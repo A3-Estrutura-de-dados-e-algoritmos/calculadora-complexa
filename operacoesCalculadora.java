@@ -208,13 +208,8 @@ public class operacoesCalculadora{
 
         System.out.println("Você quer eleva ele a quanto?");
         int eleva = sc.nextInt();
-        int numerador = 1;
-        int denominador = 1;
-        int kFatorado = 1;
-        int k = 0;
-        int verificacao = 0;
-        int contagemVerdadeiros = 0;
-        int contagemFalsos = 0;
+        int numerador = 1, denominador = 1, kFatorado = 1;
+        int k = 0, verificacao = 0, contagemVerdadeiros = 0, contagemFalsos = 0;
 
         double[] numerosParaMultiplicar = new double[4];
         boolean[] verificaNumeroImaginario = new boolean[eleva + 1];
@@ -222,9 +217,6 @@ public class operacoesCalculadora{
 
         ArrayList<Integer> indexSomaImaginarios = new ArrayList<Integer>();
         ArrayList<Integer> indexSomaReais = new ArrayList<Integer>();
-        ArrayList<Double> numerosParaSomar = new ArrayList<Double>();
-        
-        
 
         for (int i = 0; i <= eleva; i++) {
             k = i;
