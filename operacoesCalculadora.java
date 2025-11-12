@@ -67,7 +67,7 @@ public class operacoesCalculadora{
         System.out.println("Quais Zs você quer subtrair? ");
         for (int i = 0; i < quantidadeComplexosSub; i++) {
             index = sc.nextInt();
-            indexSub[i] = index - 1;
+            indexSub[i] = index;
         }
 
         //pega os coeficientes reais dos numeros selecionados
