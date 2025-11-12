@@ -328,5 +328,34 @@ public class operacoesCalculadora{
 
         prompt.adicionarNovoNumero(novoNumeroComplexo);
 
+    } 
+
+    public static void raizComplexa(pegarNumeros prompt) {
+        Scanner sc = new Scanner(System.in);
+        prompt.imprimir();
+
+        System.out.println("De qual Z você quer calcular a raiz? ");
+        int index = sc.nextInt();
+
+        double[] coefReais = prompt.GetCoeficientesReais(new int[]{index});
+        double[] coefImaginarios = prompt.GetCoeficientesImaginarios(new int[]{index});
+
+        double a = coefReais[0];
+        double b = coefImaginarios[0];
+
+        double r = Math.sqrt(a * a + b * b);
+        double parteReal = Math.sqrt((r + a) / 2);
+        double parteImaginaria = Math.signum(b) * Math.sqrt((r - a) / 2);
+
+        double[] novoNumero = new double[2];
+        novoNumero[0] = parteReal;
+        novoNumero[1] = parteImaginaria;
+        prompt.adicionarNovoNumero(novoNumero);
+    
+        String resultado = "\nResultado da Raiz = (" + String.format("%.4f", parteReal)
+            + (parteImaginaria >= 0 ? "+" : "") + String.format("%.4f", parteImaginaria) + "i)";
+            
+        System.out.println(resultado);
     }
-} 
+}
+
