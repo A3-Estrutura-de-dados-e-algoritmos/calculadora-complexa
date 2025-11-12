@@ -45,21 +45,50 @@ public class pegarNumeros {
 
     //loop que pega os numeros imaginários
     public void loopNumeros() {
-        double valor;
+        double real;
+        double imaginario;
+        int marcador = 0;
         for (int i = 0; i < quantidadeNumerosComplexos; i++) {
             System.out.printf("Digite o número real do %dº complexo: ", i + 1);
-            valor = sc.nextDouble();
-            coeficientesReais.add(valor);
+            real = sc.nextDouble();
             System.out.printf("Digite o número imaginário %dº número complexo: ", i + 1);
-            valor = sc.nextDouble();
-            coeficientesImaginarios.add(valor);
+            imaginario = sc.nextDouble();
+
+            if (coeficientesReais.size() > 0) {
+                for (int j = 0; j < coeficientesReais.size(); j++) {
+                    if (real == coeficientesReais.get(j) && imaginario == coeficientesImaginarios.get(j)) {
+                        marcador = 1;
+                        i --;
+                        System.out.println("Esse número complexo já existe! Por favor adicione outro");
+                    }
+                }
+            }
+
+            if (marcador == 0) {
+                coeficientesReais.add(real);
+                coeficientesImaginarios.add(imaginario);
+            }
+            marcador = 0;
         }
     }
 
     //função que adiciona um novo número a lista
     public void adicionarNovoNumero(double[] novoNumeroComplexo) {
-        coeficientesReais.add(novoNumeroComplexo[0]);
-        coeficientesImaginarios.add(novoNumeroComplexo[1]);
+        double real = novoNumeroComplexo[0];
+        double imaginario = novoNumeroComplexo[1];
+        int marcador = 0;
+
+        for (int i = 0; i < coeficientesReais.size(); i++) {
+            if (real == coeficientesReais.get(i) && imaginario == coeficientesImaginarios.get(i)) {
+                marcador = 1;
+                System.out.println("O resultado foi igual a Z" + (i + 1) );
+            }
+        }
+        if (marcador == 0) {
+            coeficientesReais.add(real);
+            coeficientesImaginarios.add(imaginario);
+        }
+
     }
 
     //mostra os números complexos
