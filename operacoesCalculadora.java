@@ -110,23 +110,62 @@ public class operacoesCalculadora{
         indexMulti[i] = index;
         }
 
+        //pega os coeficientes
         double[] coeficientesReais = prompt.GetCoeficientesReais(indexMulti);
         double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexMulti);
 
-        double[] numerosParaMultiplicar = {
-        coeficientesReais[0], coeficientesReais[1],
-        coeficientesImaginarios[0], coeficientesImaginarios[1]
-        };
+        //primeira multiplicacao
+        String[] multiplicacaoReal = operacoesPrimarias.multiplicar(coeficientesReais);
+        double coeficienteReal1 = Double.parseDouble(multiplicacaoReal[0]);
+        System.out.println(multiplicacaoReal[1]);
 
-        String[] resultadoMultiplicacao = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
+        double[] numerosParaMultiplicar = new double[2];
+        double[] numerosParaSomar = new double[2];
+
+        //segunda multiplicacao
+        numerosParaMultiplicar[0] = coeficientesReais[0];
+        numerosParaMultiplicar[1] = coeficientesImaginarios[1];
+        String[] multiplicacaoImaginaria = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
+        System.out.println(multiplicacaoImaginaria[1]);
+        double numeroImaginario1 = Double.parseDouble(multiplicacaoImaginaria[0]);
+
+        numerosParaMultiplicar[0] = coeficientesReais[1];
+        numerosParaMultiplicar[1] = coeficientesImaginarios[0];
+        String[] multiplicacaoImaginaria2 = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
+        System.out.println(multiplicacaoImaginaria2[1]);
+        double numeroImaginario2 = Double.parseDouble(multiplicacaoImaginaria2[0]);
+
+        numerosParaSomar[0] = numeroImaginario1;
+        numerosParaSomar[1] = numeroImaginario2;
+
+        String[] somaImaginaria = operacoesPrimarias.somar(numerosParaSomar);
+        System.out.println(somaImaginaria[1]);
+
+        double numeroImaginario = Double.parseDouble(somaImaginaria[0]);
+
+        double[] numerosParaMultiplicar2 = new double[3];
+
+        numerosParaMultiplicar2[0] = coeficientesImaginarios[0];
+        numerosParaMultiplicar2[1] = coeficientesImaginarios[1];
+        numerosParaMultiplicar2[2] = -1;
+
+        String[] multiplicacaoImaginaria3 = operacoesPrimarias.multiplicar(numerosParaMultiplicar2);
+        System.out.println(multiplicacaoImaginaria3[1]);
+        double coeficienteReal2 = Double.parseDouble(multiplicacaoImaginaria3[0]);
+
+        numerosParaSomar[0] = coeficienteReal1;
+        numerosParaSomar[1] = coeficienteReal2;
+        String[] somaReal = operacoesPrimarias.somar(numerosParaSomar);
+        System.out.println(somaReal[1]);
+        double coeficienteReal = Double.parseDouble(somaReal[0]);
+
+
 
         double[] novoNumero = new double[2];
-        novoNumero[0] = Double.parseDouble(resultadoMultiplicacao[0]); 
-        novoNumero[1] = Double.parseDouble(resultadoMultiplicacao[1]);
-        String arvore = resultadoMultiplicacao[2]; 
+        novoNumero[0] = coeficienteReal; 
+        novoNumero[1] = numeroImaginario;
 
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println("arvore: " + arvore);
     }
 
 

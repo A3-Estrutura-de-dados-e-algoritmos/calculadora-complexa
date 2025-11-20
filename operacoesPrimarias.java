@@ -78,7 +78,6 @@ public class operacoesPrimarias {
         //criação do retorno
         retorno[0] = String.valueOf(multiplicar);
         retorno[1] = arvore;
-        System.out.println(arvore);
 
         return retorno;
 
