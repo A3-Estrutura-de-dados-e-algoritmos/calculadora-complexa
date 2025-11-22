@@ -23,6 +23,7 @@ public class main{
                 System.out.println("[4] - Divisão");
                 System.out.println("[5] - conjulgar");
                 System.out.println("[6] - elevar");
+                System.out.println("[7] - raiz");
 
                 escolha = lerNum.nextInt();
 
@@ -46,6 +47,10 @@ public class main{
                         break;
                     case 6:
                         operacoesCalculadora.elevar(prompt);
+                        break;
+                    case 7:
+                        operacoesCalculadora.raizComplexa(prompt);
+                        break;
                     default:
                         break;
                 }
