@@ -35,7 +35,7 @@ public class Complexo {
         return new Complexo(this.real, this.imaginario * -1);
     }
 
-    public Complexo elevar(int n) {
+    public Complexo elevar(double n) {
         if (n == 0) return new Complexo(1, 0);
         Complexo resultado = new Complexo(1,0);
         Complexo base = new Complexo(this.real, this.imaginario);

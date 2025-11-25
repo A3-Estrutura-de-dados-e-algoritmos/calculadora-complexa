@@ -15,14 +15,25 @@ public class main{
             while (escolha != 1 || escolha != 2) {
 
                 System.out.println("Qual operação quer fazer?");
-                System.out.println("[1] - expressão de entrada");
+                System.out.println("[1] - Calcular expressão LISP");
                 System.out.println("[2] - calculadora inteligente");
-                escolha = lerNum.nextInt();
+                System.out.println("[3] - Verificar igualdade");
+                escolha = Integer.parseInt(lerNum.nextLine());
 
                 if (escolha == 1) {
-                        List<String> toks = expressaoLisp.tokenize("(sqrt (complex 5 7))");
-                        NoLisp root = (NoLisp) expressaoLisp.parseTokens(toks);
-                        System.out.println(expressaoLisp.eval(root));
+                    System.out.println("Digite a expressão:");
+                    String expr = lerNum.nextLine();
+
+                    List<String> tokens = expressaoLisp.tokenize(expr);
+                    NoLisp raiz = (NoLisp) expressaoLisp.parseTokens(tokens);
+
+                    System.out.println("Árvore sintática:");
+                    expressaoLisp.imprimeArvore(raiz);
+
+                    Object resultado = expressaoLisp.eval(raiz);
+
+                    System.out.println("Resultado:");
+                    System.out.println(resultado.toString());
                     //validadorExpressao.handleExpressionInput(lerNum, prompt);
                 } else if (escolha == 2) {
                     prompt.loopNumeros();
@@ -72,8 +83,24 @@ public class main{
                                 break;
                         }
                     }
+                } else if (escolha == 3) {
+                    System.out.println("Digite a primeira expressão:");
+                    String expr1 = lerNum.nextLine();
+
+                    System.out.println("Digite a segunda expressão:");
+                    String expr2 = lerNum.nextLine();
+
+                    var arv1 = expressaoLisp.parseTokens(expressaoLisp.tokenize(expr1));
+                    var arv2 = expressaoLisp.parseTokens(expressaoLisp.tokenize(expr2));
+
+                    if (expressaoLisp.iguais((NoLisp) arv1, (NoLisp) arv2)) {
+                        System.out.println("As expressões são estruturalmente iguais!");
+                    } else {
+                        System.out.println("As expressões são diferentes.");
+                    }
                 } else {
                     System.out.println("Faça uma escolha válida!");
+                    
                 }
             }
             

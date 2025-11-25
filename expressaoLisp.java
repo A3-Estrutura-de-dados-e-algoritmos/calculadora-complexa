@@ -172,7 +172,34 @@ public class expressaoLisp {
             }
             return resultado;             
         } else if (operador.equals("^")) {
-            //
+            if (raiz.filhos.size() != 3) {
+                throw new RuntimeException("^ requer exatamente 2 argumentos");
+            }
+
+            Object baseObj = eval(raiz.filhos.get(1));
+            Object expObj  = eval(raiz.filhos.get(2));
+
+            Complexo base;
+
+            if (baseObj instanceof Complexo) {
+                base = (Complexo) baseObj;
+            } else {
+                throw new RuntimeException("Base do operador ^ precisa ser um número complexo");
+            }
+
+            double expoente;
+
+            if (expObj instanceof Complexo) {
+                Complexo c = (Complexo) expObj;
+                if (c.imaginario != 0) {
+                    throw new RuntimeException("Expoente deve ser um número real!");
+                }
+                expoente = c.real;
+            } else {
+                expoente = Double.parseDouble(expObj.toString());
+            }
+
+            return base.elevar(expoente);
         } else if (operador.equals("sqrt")) {
             Complexo resultado = new Complexo(0, 0);
             for (Complexo c : args) {
@@ -185,21 +212,46 @@ public class expressaoLisp {
         
     }
 
-    public static void imprimir(NoLisp no) {
-        if (no == null) return;
+    public static void imprimeArvore(NoLisp no) {
+        imprimeArvore(no, 0);
+    }
 
-        // Átomos (nós com valor)
-        if (no.valor != null) {
-            System.out.print(no.valor + " ");
+    private static void imprimeArvore(NoLisp no, int nivel) {
+        String indent = "    ".repeat(nivel);
+
+        if (no.filhos.isEmpty()) {
+            System.out.println(indent + no.valor);
             return;
         }
 
-        // Listas
-        System.out.print("(");
-        for (NoLisp filho : no.filhos) {
-            imprimir(filho);
+        String operador = no.filhos.get(0).valor;
+
+        System.out.println(indent + "(" + operador);
+
+        for (int i = 1; i < no.filhos.size(); i++) {
+            imprimeArvore(no.filhos.get(i), nivel + 1);
         }
-        System.out.print(")");
+
+        System.out.println(indent + ")");
+    }
+
+    public static boolean iguais(NoLisp a, NoLisp b) {
+        if (a == null && b == null) return true;
+
+        if (a == null || b == null) return false;
+
+        if (a.valor == null && b.valor != null) return false;
+        if (a.valor != null && !a.valor.equals(b.valor)) return false;
+
+        if (a.filhos.size() != b.filhos.size()) return false;
+
+        for (int i = 0; i < a.filhos.size(); i++) {
+            if (!iguais(a.filhos.get(i), b.filhos.get(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
