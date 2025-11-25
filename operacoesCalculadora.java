@@ -3,26 +3,29 @@ import java.util.Scanner;
 
 public class operacoesCalculadora{
 
+    //funcao que adiciona
     public static void adicaoComplexa(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
 
         prompt.imprimir();
 
         //quantidade de numeros complexos que irá somar
-        int quantidadeComplexosSoma, index;
-
-        //pergunta de quantos Zs serão somados
-        System.out.println("Quantos Zs você quer somar? ");
-        quantidadeComplexosSoma = sc.nextInt();
+        int index;
 
         //pega a quantidade de index que irão ser somados
-        int[] indexSoma = new int[quantidadeComplexosSoma];
+        int[] indexSoma = new int[2];
 
         //pega os index dos numeros que serão somados
         System.out.println("Quais Zs você quer somar? ");
-        for (int i = 0; i < quantidadeComplexosSoma; i++) {
+        for (int i = 0; i < 2; i++) {
+            System.out.print(i + 1 + "º Z: ");
             index = sc.nextInt();
-            indexSoma[i] = index;
+            if (index > prompt.quantidadeNumerosComplexos) {
+                System.out.println("Esse Z não existe! coloque um valor válido!");
+                i --;
+            } else {
+                indexSoma[i] = index;
+            }
         }
 
         //pega os coeficientes reais dos numeros selecionados
@@ -36,38 +39,44 @@ public class operacoesCalculadora{
 
         //atribui o novo número e retorna a nova árvore
         double[] novoNumero = new double[2];
-        String arvore = "";
-        novoNumero[0] = Double.parseDouble(retornoReais[0]);
-        arvore += retornoReais[1];          
+        novoNumero[0] = Double.parseDouble(retornoReais[0]);      
         novoNumero[1] = Double.parseDouble(retornoImaginarios[0]);
-        arvore += retornoImaginarios[1];
-
+    
+        prompt.quantidadeNumerosComplexos++;
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println(arvore);
+        System.out.println("arvore: ");
+        System.out.println("(+");
+        System.out.println("    (complex " + coeficientesReais[0] + " " + coeficientesImaginarios[0] +")");
+        System.out.println("    (complex " + coeficientesReais[1] + " " + coeficientesImaginarios[1] +")");
+        System.out.println(")");
         
+        System.out.println("Resultado adicionado aos Zs!");
         
     }
 
+    //funcao que subtrai
     public static void subtracaoComplexa(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
 
         prompt.imprimir();
 
         //quantidade de numeros complexos que irá subtrair
-        int quantidadeComplexosSub, index;
-
-        //pergunta de quantos Zs serão subtraídos
-        System.out.println("Quantos Zs você quer subtrair? ");
-        quantidadeComplexosSub = sc.nextInt();
+        int index;
 
         //pega a quantidade de index que irão ser subtraídos
-        int[] indexSub = new int[quantidadeComplexosSub];
+        int[] indexSub = new int[2];
 
         //pega os index dos numeros que serão subtraídos
         System.out.println("Quais Zs você quer subtrair? ");
-        for (int i = 0; i < quantidadeComplexosSub; i++) {
+        for (int i = 0; i < 2; i++) {
+            System.out.print(i + 1 +"º Z: ");
             index = sc.nextInt();
-            indexSub[i] = index;
+            if (index > prompt.quantidadeNumerosComplexos) {
+                System.out.println("Esse Z não existe! coloque um valor válido!");
+                i --;
+            } else {
+                indexSub[i] = index;
+            }
         }
 
         //pega os coeficientes reais dos numeros selecionados
@@ -81,33 +90,41 @@ public class operacoesCalculadora{
 
         //atribui o novo número e retorna a nova árvore
         double[] novoNumero = new double[2];
-        String arvore = "";
-        novoNumero[0] = Double.parseDouble(retornoReais[0]);
-        arvore += retornoReais[1];          
+        novoNumero[0] = Double.parseDouble(retornoReais[0]);         
         novoNumero[1] = Double.parseDouble(retornoImaginarios[0]);
-        arvore += retornoImaginarios[1];
 
+        //arvore lisp
+        System.out.println("arvore: ");
+        System.out.println("(-");
+        System.out.println("    (complex " + coeficientesReais[0] + " " + coeficientesImaginarios[0] +")");
+        System.out.println("    (complex " + coeficientesReais[1] + " " + coeficientesImaginarios[1] +")");
+        System.out.println(")");
+        System.out.println("Resultado adicionado aos Zs!");
+
+        //adicionando a pool de numeros
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println(arvore);
-        
+        prompt.quantidadeNumerosComplexos++;
+
     }
 
-
+    //funcao que multiplica
     public static void multiplicacaoComplexa(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
 
         prompt.imprimir();
-
-        final int quantidadeComplexosMulti = 2; 
+ 
         int index;
 
-        System.out.println("A multiplicação é binária (Z1 * Z2).");
-        System.out.println("Quais Zs (Z1 e Z2) você quer multiplicar? ");
-
-        int[] indexMulti = new int[quantidadeComplexosMulti];
-        for (int i = 0; i < quantidadeComplexosMulti; i++) {
-        index = sc.nextInt();
-        indexMulti[i] = index;
+        int[] indexMulti = new int[2];
+        for (int i = 0; i < 2; i++) {
+            System.out.print(i + 1 + "º Z: ");
+            index = sc.nextInt();
+            if (index > prompt.quantidadeNumerosComplexos) {
+                System.out.println("Esse Z não existe! coloque um valor válido!");
+                i --;
+            } else {
+                indexMulti[i] = index;
+            }
         }
 
         //pega os coeficientes
@@ -117,7 +134,6 @@ public class operacoesCalculadora{
         //primeira multiplicacao
         String[] multiplicacaoReal = operacoesPrimarias.multiplicar(coeficientesReais);
         double coeficienteReal1 = Double.parseDouble(multiplicacaoReal[0]);
-        System.out.println(multiplicacaoReal[1]);
 
         double[] numerosParaMultiplicar = new double[2];
         double[] numerosParaSomar = new double[2];
@@ -126,20 +142,17 @@ public class operacoesCalculadora{
         numerosParaMultiplicar[0] = coeficientesReais[0];
         numerosParaMultiplicar[1] = coeficientesImaginarios[1];
         String[] multiplicacaoImaginaria = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
-        System.out.println(multiplicacaoImaginaria[1]);
         double numeroImaginario1 = Double.parseDouble(multiplicacaoImaginaria[0]);
 
         numerosParaMultiplicar[0] = coeficientesReais[1];
         numerosParaMultiplicar[1] = coeficientesImaginarios[0];
         String[] multiplicacaoImaginaria2 = operacoesPrimarias.multiplicar(numerosParaMultiplicar);
-        System.out.println(multiplicacaoImaginaria2[1]);
         double numeroImaginario2 = Double.parseDouble(multiplicacaoImaginaria2[0]);
 
         numerosParaSomar[0] = numeroImaginario1;
         numerosParaSomar[1] = numeroImaginario2;
 
         String[] somaImaginaria = operacoesPrimarias.somar(numerosParaSomar);
-        System.out.println(somaImaginaria[1]);
 
         double numeroImaginario = Double.parseDouble(somaImaginaria[0]);
 
@@ -150,13 +163,11 @@ public class operacoesCalculadora{
         numerosParaMultiplicar2[2] = -1;
 
         String[] multiplicacaoImaginaria3 = operacoesPrimarias.multiplicar(numerosParaMultiplicar2);
-        System.out.println(multiplicacaoImaginaria3[1]);
         double coeficienteReal2 = Double.parseDouble(multiplicacaoImaginaria3[0]);
 
         numerosParaSomar[0] = coeficienteReal1;
         numerosParaSomar[1] = coeficienteReal2;
         String[] somaReal = operacoesPrimarias.somar(numerosParaSomar);
-        System.out.println(somaReal[1]);
         double coeficienteReal = Double.parseDouble(somaReal[0]);
 
 
@@ -165,82 +176,120 @@ public class operacoesCalculadora{
         novoNumero[0] = coeficienteReal; 
         novoNumero[1] = numeroImaginario;
 
+        System.out.println("arvore: ");
+        System.out.println("(*");
+        System.out.println("    (complex " + coeficientesReais[0] + " " + coeficientesImaginarios[0] +")");
+        System.out.println("    (complex " + coeficientesReais[1] + " " + coeficientesImaginarios[1] +")");
+        System.out.println(")");
+
         prompt.adicionarNovoNumero(novoNumero);
+        prompt.quantidadeNumerosComplexos++;
     }
 
-
+    //funcao que divide
     public static void divisaoComplexa(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
         prompt.imprimir();
 
-        final int quantidadeComplexosDiv = 2; 
         int index;
 
-        System.out.println("A divisão é binária (Z1 / Z2).");
-        System.out.println("Quais Zs (Z1 e Z2) você quer dividir? ");
-
-        int[] indexDiv = new int[quantidadeComplexosDiv];
-        for (int i = 0; i < quantidadeComplexosDiv; i++) {
+        int[] indexDiv = new int[2];
+        for (int i = 0; i < 2; i++) {
+            System.out.print(i + 1 + "º Z: ");
             index = sc.nextInt();
-            indexDiv[i] = index;
+            if (index > prompt.quantidadeNumerosComplexos) {
+                System.out.println("Esse Z não existe! coloque um valor válido!");
+                i --;
+            } else {
+                indexDiv[i] = index;
+            }
         }
 
-        double[] coeficientesReais = prompt.GetCoeficientesReais(indexDiv);
-        double[] coeficientesImaginarios = prompt.GetCoeficientesImaginarios(indexDiv);
+        double a = prompt.getCoeficienteReal(indexDiv[0]);
+        double b = prompt.getCoeficienteImaginario(indexDiv[0]);
 
+        double c = prompt.getCoeficienteReal(indexDiv[1]);
+        double d = prompt.getCoeficienteImaginario(indexDiv[1]);
 
-        double[] numerosParaDividir = {
-            coeficientesReais[0], coeficientesReais[1],
-            coeficientesImaginarios[0], coeficientesImaginarios[1]
-        };
+        // arvore sintática
+        System.out.println("arvore:");
+        System.out.println("(/");
+        System.out.println("    (complex " + a + " " + b + ")");
+        System.out.println("    (complex " + c + " " + d + ")");
+        System.out.println(")");
 
-        String [] resultadoDivisao = operacoesPrimarias.dividir(numerosParaDividir);
+        double denom = c * c + d * d;
 
-        if (resultadoDivisao == null) {
+        if (denom == 0) {
             System.out.println("Erro: divisão por zero!");
             return;
         }
 
+        double real = (a * c + b * d) / denom;
+        double imag = (b * c - a * d) / denom;
+
+        String realFmt = String.format("%.2f", real); // 2 casas
+        String imagFmt = String.format("%.2f", imag);
+
         double[] novoNumero = new double[2];
-        novoNumero[0] = Double.parseDouble(resultadoDivisao[0]); 
-        novoNumero[1] = Double.parseDouble(resultadoDivisao[1]); 
-        String arvore = resultadoDivisao[2]; 
+
+        novoNumero[0] = Double.parseDouble(String.format("%.2f", real).replace(",", "."));
+        novoNumero[1] = Double.parseDouble(String.format("%.2f", imag).replace(",", "."));
 
         prompt.adicionarNovoNumero(novoNumero);
-        System.out.println("arvore: " + arvore); 
 
+        System.out.println("Resultado da divisão:");
+        System.out.println(realFmt + " + " + imagFmt + "i");
     }
-    
+
+    //funcao que conjulga
     public static void conjulgar(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
+        int escolha;
+        do {
+            System.out.println("Qual Z você quer conjulgar?");
+            prompt.imprimir();
 
-        System.out.println("Qual Z você quer conjulgar?");
-        prompt.imprimir();
+            System.out.print("nº Z:");
+            escolha = sc.nextInt();
+            if (escolha > prompt.quantidadeNumerosComplexos) {
+                System.out.println("Valor inválido");
+            } 
+        } while (escolha > prompt.quantidadeNumerosComplexos);
 
-        int escolha = sc.nextInt();
 
-        if (escolha > prompt.quantidadeNumerosComplexos) {
-            System.out.println("Valor inválido");
-        } else {
-            double coeficienteReal = prompt.getCoeficienteReal(escolha);
-            double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
+        double coeficienteReal = prompt.getCoeficienteReal(escolha);
+        double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
 
-            double[] novoNumero = new double[2];
-            novoNumero[0] = coeficienteReal;
-            novoNumero[1] = coeficienteImaginario * -1;
+        double[] novoNumero = new double[2];
+        novoNumero[0] = coeficienteReal;
+        novoNumero[1] = coeficienteImaginario * -1;
 
-            prompt.adicionarNovoNumero(novoNumero);
-            System.out.println("Numero complexo conjugado adicionado!");
-            
-        }
+        prompt.quantidadeNumerosComplexos++;
+        prompt.adicionarNovoNumero(novoNumero);
+        System.out.println("arvore: ");
+        System.out.println("(conj");
+        System.out.println("    (complex " + coeficienteReal + " " + coeficienteImaginario +")");
+        System.out.println(")");
+        System.out.println("Numero complexo conjugado adicionado!");
+        
     }
 
+    //funcao que eleva
     public static void elevar(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
-        prompt.imprimir();
 
-        System.out.println("Qual Z você quer elevar?");
-        int escolha = sc.nextInt();
+        int escolha;
+        do {
+            System.out.println("Qual Z você quer elevar?");
+            prompt.imprimir();
+            
+            System.out.print("nº Z:");
+            escolha = sc.nextInt();
+            if (escolha > prompt.quantidadeNumerosComplexos || escolha <= 0) {
+                System.out.println("Valor inválido");
+            } 
+        } while (escolha > prompt.quantidadeNumerosComplexos || escolha <= 0);
 
         double coeficienteReal = prompt.getCoeficienteReal(escolha);
         double coeficienteImaginario = prompt.getCoeficienteImaginario(escolha);
@@ -320,8 +369,6 @@ public class operacoesCalculadora{
 
             expressaoExtendida[i] = Double.parseDouble(resultado[0]);
             
-            System.out.println(resultado[1]);
-
         }
 
         for (int i = 0; i < expressaoExtendida.length; i++) {
@@ -344,7 +391,6 @@ public class operacoesCalculadora{
             }
 
             String[] resultado = operacoesPrimarias.somar(numerosParaSomarImaginarios);
-            System.out.println(resultado[1]);
             novoNumeroComplexo[1] = Double.parseDouble(resultado[0]);
         }
 
@@ -354,7 +400,6 @@ public class operacoesCalculadora{
             }
 
             String[] resultado = operacoesPrimarias.somar(numerosParaSomarReais);
-            System.out.println(resultado[1]);
             novoNumeroComplexo[0] = Double.parseDouble(resultado[0]);
         }
 
@@ -365,10 +410,17 @@ public class operacoesCalculadora{
             novoNumeroComplexo[1] = expressaoExtendida[indexSomaImaginarios.get(0)];
         }
 
+        System.out.println("arvore: ");
+        System.out.println("(^");
+        System.out.println("    (complex " + coeficienteReal + " " + coeficienteImaginario +")");
+        System.out.println("    " + eleva);
+        System.out.println(")");
+        prompt.quantidadeNumerosComplexos++;
         prompt.adicionarNovoNumero(novoNumeroComplexo);
 
     } 
 
+    //funcao que tira a raiz
     public static void raizComplexa(pegarNumeros prompt) {
         Scanner sc = new Scanner(System.in);
         prompt.imprimir();
@@ -389,11 +441,17 @@ public class operacoesCalculadora{
         double[] novoNumero = new double[2];
         novoNumero[0] = parteReal;
         novoNumero[1] = parteImaginaria;
+        prompt.quantidadeNumerosComplexos++;
         prompt.adicionarNovoNumero(novoNumero);
     
         String resultado = "\nResultado da Raiz = (" + String.format("%.4f", parteReal)
             + (parteImaginaria >= 0 ? "+" : "") + String.format("%.4f", parteImaginaria) + "i)";
-            
+
+        System.out.println("arvore: ");
+        System.out.println("(sqrt");
+        System.out.println("    (complex " + a + " " + b +")");
+        System.out.println(")");
+
         System.out.println(resultado);
     }
 }
