@@ -30,19 +30,23 @@ public class operacoesPrimarias {
     //função que subtrai dois numeros enviados no vetor, sendo o primeiro menos o segundo
     public static String[] subtrair(double[] numerosParaSubtrair) {
         String[] retorno = new String[2];
+        String numeroReferencia;
+        String arvore = "-(";
 
         //subtração iniciando
-        double subtracao;
+        double subtracao = 0;
 
-        //atribuição de valores 
-        double primeiroNumero = numerosParaSubtrair[0];
-        double segundoNumero = numerosParaSubtrair[1];
+        for (int i = 0; i < numerosParaSubtrair.length; i++) {
+            if (i != 0) {
+                subtracao -= numerosParaSubtrair[i];
+            } else {
+                subtracao += numerosParaSubtrair[i];
+            }
+            numeroReferencia = String.valueOf(numerosParaSubtrair[i]);
+            arvore = arvore + " " + numeroReferencia + " ";
+        }
 
-        //subtração
-        subtracao = primeiroNumero - segundoNumero;
-
-        //confecção da árvore
-        String arvore = "-( " + String.valueOf(primeiroNumero) + " " + String.valueOf(segundoNumero) + " )";
+        arvore += ") ";
 
         //criação do vetor e retorno
         retorno[0] = String.valueOf(subtracao);
