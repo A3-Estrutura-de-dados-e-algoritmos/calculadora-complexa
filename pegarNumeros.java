@@ -10,10 +10,6 @@ public class pegarNumeros {
     ArrayList<Double> coeficientesImaginarios = new ArrayList<Double>();
     Scanner sc = new Scanner(System.in);
 
-    //construtor
-    public pegarNumeros(int quantidadeNumerosComplexos) {
-        this.quantidadeNumerosComplexos = quantidadeNumerosComplexos;
-    }
 
     public double getCoeficienteReal(int numeroZReferente) {
         return coeficientesReais.get(numeroZReferente - 1);
@@ -48,6 +44,9 @@ public class pegarNumeros {
         double real;
         double imaginario;
         int marcador = 0;
+        System.out.println("Quantidade de números complexos: ");
+        int quantidadeNumerosComplexos = sc.nextInt();
+        this.quantidadeNumerosComplexos += quantidadeNumerosComplexos;
         for (int i = 0; i < quantidadeNumerosComplexos; i++) {
             System.out.printf("Digite o número real do %dº complexo: ", i + 1);
             real = sc.nextDouble();
