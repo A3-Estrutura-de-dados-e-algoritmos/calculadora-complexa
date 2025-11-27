@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class expressaoLisp {
+    public static Map<String, Double> variaveis = new HashMap<>();
 
     public static List<String> tokenize(String expr) {
         List<String> tokens = new ArrayList<String>();
@@ -69,7 +70,18 @@ public class expressaoLisp {
                 double real = Double.parseDouble(token);
                 return new Complexo(real, 0.0);
             } catch (NumberFormatException ex) {
-                return token;
+                if (variaveis.containsKey(token)) {
+                    return variaveis.get(token);
+                }
+
+                Scanner sc = new Scanner(System.in);
+                System.out.println("A variável " + token + " representa um número complexo.");
+                System.out.println("Digite o valor da variável " + token +": ");
+                double real = sc.nextDouble();
+
+                variaveis.put(token, real);
+
+                return real;
             }
         }
 
