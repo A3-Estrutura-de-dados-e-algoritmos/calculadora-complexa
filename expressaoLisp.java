@@ -52,6 +52,9 @@ public class expressaoLisp {
                     raiz = novoNo;
                 }
             } else if (token.equals(")")) {
+                if (pilha.isEmpty()) {
+                    throw new RuntimeException("Erro: ')' inesperado.");
+                }
                 pilha.pop();
             } else {
                 NoLisp noAtomico = new NoLisp(token);
@@ -65,6 +68,12 @@ public class expressaoLisp {
     public static Object eval(NoLisp raiz) {
         if (raiz.filhos.isEmpty()) {
             String token = raiz.valor;
+
+            if (token.equals("complex") || token.equals("+") || token.equals("-") ||
+            token.equals("*") || token.equals("/") || token.equals("^") ||
+            token.equals("conj") || token.equals("sqrt")) {
+                throw new RuntimeException("Erro: operador '" + token + "' usado sem parênteses.");
+            }
 
             try {
                 double real = Double.parseDouble(token);
@@ -85,6 +94,9 @@ public class expressaoLisp {
             }
         }
 
+        if (raiz.filhos.size() < 2) {
+            throw new RuntimeException("Erro: operador '" + raiz.filhos.get(0).valor + "' com quantidade insuficiente de argumentos.");
+        }
         NoLisp operadorNode = raiz.filhos.get(0);
         if (operadorNode.filhos.isEmpty() == false) {
             throw new RuntimeException("Operador inválido");
@@ -183,7 +195,7 @@ public class expressaoLisp {
                 resultado = resultado.conjulgado();             
             }
             return resultado;             
-        } else if (operador.equals("^")) {
+        } else if (operador.equals("^") || operador.equals("**")) {
             if (raiz.filhos.size() != 3) {
                 throw new RuntimeException("^ requer exatamente 2 argumentos");
             }
