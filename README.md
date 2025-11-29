@@ -36,6 +36,6 @@ javac -encoding UTF-8 -cp "libs/*" *.java -d out
 ```
 
 3. Executar:
-````bash
+```bash
 java -cp "out;libs/*" main
 ```
