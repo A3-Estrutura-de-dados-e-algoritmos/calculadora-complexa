@@ -35,6 +35,12 @@ git clone https://github.com/A3-Estrutura-de-dados-e-algoritmos/calculadora-comp
 javac -encoding UTF-8 -cp "libs/*" *.java -d out
 ```
 
+## Componentes do Grupo:
+- Victor Botto Silva Passos - 12724130769
+- Paulo Victor Nonato de Jesus - 12724129348
+- Rafael Silva Rangel de Almeida – 1272412932
+
+
 3. Executar:
 ```bash
 java -cp "out;libs/*" main
