@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class expressaoLisp {
-    public static Map<String, Double> variaveis = new HashMap<>();
+    public static Map<String, Complexo> variaveis = new HashMap<>();
 
     public static List<String> tokenize(String expr) {
         List<String> tokens = new ArrayList<String>();
@@ -85,12 +85,15 @@ public class expressaoLisp {
 
                 Scanner sc = new Scanner(System.in);
                 System.out.println("A variável " + token + " representa um número complexo.");
-                System.out.println("Digite o valor da variável " + token +": ");
+                System.out.println("Digite o valor da parte real independente " + token +": ");
                 double real = sc.nextDouble();
+                System.out.println("Digite o valor da parte real imaginária " + token +": ");
+                double imaginario = sc.nextDouble();
 
-                variaveis.put(token, real);
+                Complexo novoComplexo = new Complexo(real, imaginario);
+                variaveis.put(token, novoComplexo);
 
-                return real;
+                return novoComplexo;
             }
         }
 
@@ -132,14 +135,6 @@ public class expressaoLisp {
             if (variavel instanceof Complexo) {
                 args.add((Complexo)variavel);
 
-            } else if (variavel instanceof String) {
-                String nomeVariavel = (String)variavel;
-                System.out.println("Digite o valor real de " + nomeVariavel + ": ");
-                double variavelReal = new Scanner(System.in).nextDouble();
-                System.out.println("Digite o valor imaginário de " + nomeVariavel + ": ");
-                double variavelImaginaria = new Scanner(System.in).nextDouble();
-                Complexo numeroComplexo = new Complexo(variavelReal, variavelImaginaria);
-                args.add(numeroComplexo);
             } else {
                 throw new RuntimeException("Argumento inesperado: " + variavel);
             }
