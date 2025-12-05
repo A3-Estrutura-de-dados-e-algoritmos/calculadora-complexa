@@ -22,6 +22,7 @@ public class main{
 
                 if (escolha == 1) {
                     System.out.println("Digite a expressão:");
+                    System.out.println("Para representar o número complexo utilize (complex x y)");
                     String expr = lerNum.nextLine();
 
                     List<String> tokens = expressaoLisp.tokenize(expr);
