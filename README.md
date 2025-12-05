@@ -23,6 +23,29 @@ Funcionalidades
 
 - Detecção de erros: parênteses incorretos, operadores inválidos, argumentos faltando, divisão por zero, uso incorreto de complex, etc.
 
+## Como utilizar
+Ao inicar o programa ele irá exibir três opções:
+
+- opção [1] - Calcular Expressão LISP
+  Ao colocar uma expressão LISP, ex:
+  ```bash
+  (+ (* (complex 2 3) (complex 4 5)) (- (complex 10 -2) (complex 3 1)))
+  ```
+  
+- opção [2] - Calculadora Inteligente
+  Ao dar o valor dos números complexos que irá calcular, ela vai ter perguntar qual operação quer fazer, assim gerando um novo Z como resposta.
+
+- opção [3] - Verificação de Igualdade
+  O programa irá pedir duas expressões lisp como entrada e te dirá caso elas sejam estruturalmente iguais ou não. Ex:
+  Expressão 1:
+  ```bash
+  (+ (complex 1 2) (complex 3 4))
+  ```
+  Expressão 2:
+  ```bash
+  (+ (complex 3 4) (complex 1 2))
+  ```
+
 ## Como executar (VisualStudioCode)
 
 1. Clone o repositório:
